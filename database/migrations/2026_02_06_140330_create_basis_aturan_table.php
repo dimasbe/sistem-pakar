@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('basis_aturan', function (Blueprint $table) {
+            $table->id('id_aturan'); // ← Ubah jadi id()
+            $table->unsignedBigInteger('id_pertanyaan'); // ← Ubah jadi unsignedBigInteger
+            $table->unsignedBigInteger('id_kepribadian'); // ← Ubah jadi unsignedBigInteger
+            $table->decimal('cf_pakar', 4, 2);
+            $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('id_pertanyaan')
+                ->references('id_pertanyaan')
+                ->on('pertanyaan')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('id_kepribadian')
+                ->references('id_kepribadian')
+                ->on('kepribadian')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('basis_aturan');
+    }
+};
