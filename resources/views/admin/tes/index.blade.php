@@ -292,7 +292,7 @@
                                 </td>
                                 <td class="px-4 py-5 text-center whitespace-nowrap">
                                     <div class="flex justify-center gap-2 action-buttons">
-                                        <a href="{{ route('admin.tes.show', $item->id_tes) }}"
+                                        <a href="{{ route('admin.tes.show', $item->id_tes) }}?page={{ $tes->currentPage() }}&search={{ request('search') }}"
                                             class="bg-gray-500 text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-gray-600 transition shadow-sm">
                                             Detail
                                         </a>
@@ -301,6 +301,8 @@
                                             action="{{ route('admin.tes.destroy', $item->id_tes) }}" method="POST"
                                             class="inline-block">
                                             @csrf @method('DELETE')
+                                            <input type="hidden" name="page" value="{{ $tes->currentPage() }}">
+                                            <input type="hidden" name="search" value="{{ request('search') }}">
                                             <button type="button"
                                                 onclick="confirmDelete('{{ $item->id_tes }}', '{{ $item->siswa->nama_lengkap ?? 'Siswa Ini' }}')"
                                                 class="bg-green-600 text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-green-700 transition shadow-sm">

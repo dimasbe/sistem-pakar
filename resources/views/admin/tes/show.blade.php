@@ -6,7 +6,7 @@
 @section('content')
     <div class="max-w-full space-y-8">
         <div class="print:hidden">
-            <a href="{{ route('admin.tes.index') }}"
+            <a href="{{ route('admin.tes.index', ['page' => request('page'), 'search' => request('search')]) }}"
                 class="text-[#2E6C9F] text-sm font-semibold hover:underline flex items-center transition">
                 <i class="fas fa-arrow-left mr-2"></i> Kembali
             </a>

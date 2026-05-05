@@ -57,14 +57,20 @@ class TesController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         try {
             $tes = Tes::findOrFail($id);
             $tes->delete();
-            return redirect()->route('admin.tes.index')->with('success', 'Data hasil tes berhasil dihapus.');
+            return redirect()->route('admin.tes.index', [
+                'page'   => $request->input('page', 1),
+                'search' => $request->input('search'),
+            ])->with('success', 'Data hasil tes berhasil dihapus.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.tes.index')->with('error', 'Gagal menghapus data.');
+            return redirect()->route('admin.tes.index', [
+                'page'   => $request->input('page', 1),
+                'search' => $request->input('search'),
+            ])->with('error', 'Gagal menghapus data.');
         }
     }
 
